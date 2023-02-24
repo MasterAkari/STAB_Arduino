@@ -1,0 +1,2 @@
+# STAB_Arduino
+PlatformIOのUnit testをNativeで実行するときに使うArduino.hのスタブ
