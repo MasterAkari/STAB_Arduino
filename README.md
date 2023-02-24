@@ -11,10 +11,10 @@ PlatformIOでユニットテストするときにPC上でテストしたい。
 
 ## 使い方
 
-* platform_packagesにこのリポジトリを追加してください。「Arduino.h」が競合する場合がありますのでご留意ください。
+* 本レポジトリをlibフォルダに格納してください。「Arduino.h」が競合する場合がありますのでご留意ください。
   * https://github.com/MasterAkari/STAB_Arduino
 
-
+* test用のenv設定を実施してください。
 
 ```ini
 [env:test_native]
@@ -22,7 +22,6 @@ platform = native
 test_build_src = true
 platform_packages =
     tool-cppcheck@1.260.0
-    https://github.com/MasterAkari/STAB_Arduino
 check_tool = cppcheck
 check_flags = --enable=all
 ```
