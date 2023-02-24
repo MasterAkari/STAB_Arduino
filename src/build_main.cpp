@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2023 / MaSiRo Project.
  *
  */
-#if TEST_STAB_BUILD
+#if TEST_BUILD_STAB_MAIN
 #include "Arduino.h"
 
 int main(int argc, char **argv)
