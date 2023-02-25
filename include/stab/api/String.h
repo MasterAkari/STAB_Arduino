@@ -39,16 +39,11 @@ namespace arduino
 //     -felide-constructors
 //     -std=c++0x
 
-class __FlashStringHelper;
-#define F(string_literal) (reinterpret_cast<const __FlashStringHelper *>(PSTR(string_literal)))
-
 // An inherited class for holding the result of a concatenation.  These
 // result objects are assumed to be writable by subsequent concatenations.
-class StringSumHelper;
 
 // The string class
 class String {
-    friend class StringSumHelper;
     // use a function pointer to allow for "if (s)" without the
     // complications of an operator bool(). for more information, see:
     // http://www.artima.com/cppsource/safebool.html
@@ -72,7 +67,6 @@ public:
     {
     }
     String(const String &str);
-    String(const __FlashStringHelper *str);
 #if __cplusplus >= 201103L || defined(__GXX_EXPERIMENTAL_CXX0X__)
     String(String &&rval);
 #endif
@@ -101,7 +95,6 @@ public:
     // marked as invalid ("if (s)" will be false).
     String &operator=(const String &rhs);
     String &operator=(const char *cstr);
-    String &operator=(const __FlashStringHelper *str);
 #if __cplusplus >= 201103L || defined(__GXX_EXPERIMENTAL_CXX0X__)
     String &operator=(String &&rval);
 #endif
@@ -126,7 +119,6 @@ public:
     bool concat(unsigned long num);
     bool concat(float num);
     bool concat(double num);
-    bool concat(const __FlashStringHelper *str);
 
     // if there's not enough memory for the concatenated value, the string
     // will be left unchanged (but this isn't signalled in any way)
@@ -180,23 +172,6 @@ public:
         concat(num);
         return (*this);
     }
-    String &operator+=(const __FlashStringHelper *str)
-    {
-        concat(str);
-        return (*this);
-    }
-
-    friend StringSumHelper &operator+(const StringSumHelper &lhs, const String &rhs);
-    friend StringSumHelper &operator+(const StringSumHelper &lhs, const char *cstr);
-    friend StringSumHelper &operator+(const StringSumHelper &lhs, char c);
-    friend StringSumHelper &operator+(const StringSumHelper &lhs, unsigned char num);
-    friend StringSumHelper &operator+(const StringSumHelper &lhs, int num);
-    friend StringSumHelper &operator+(const StringSumHelper &lhs, unsigned int num);
-    friend StringSumHelper &operator+(const StringSumHelper &lhs, long num);
-    friend StringSumHelper &operator+(const StringSumHelper &lhs, unsigned long num);
-    friend StringSumHelper &operator+(const StringSumHelper &lhs, float num);
-    friend StringSumHelper &operator+(const StringSumHelper &lhs, double num);
-    friend StringSumHelper &operator+(const StringSumHelper &lhs, const __FlashStringHelper *rhs);
 
     // comparison (only works w/ Strings and "strings")
     operator StringIfHelperType() const
@@ -358,49 +333,13 @@ protected:
 
     // copy and move
     String &copy(const char *cstr, unsigned int length);
-    String &copy(const __FlashStringHelper *pstr, unsigned int length);
 #if __cplusplus >= 201103L || defined(__GXX_EXPERIMENTAL_CXX0X__)
     void move(String &rhs);
 #endif
 };
 
-class StringSumHelper : public String {
-public:
-    StringSumHelper(const String &s) : String(s)
-    {
-    }
-    StringSumHelper(const char *p) : String(p)
-    {
-    }
-    StringSumHelper(char c) : String(c)
-    {
-    }
-    StringSumHelper(unsigned char num) : String(num)
-    {
-    }
-    StringSumHelper(int num) : String(num)
-    {
-    }
-    StringSumHelper(unsigned int num) : String(num)
-    {
-    }
-    StringSumHelper(long num) : String(num)
-    {
-    }
-    StringSumHelper(unsigned long num) : String(num)
-    {
-    }
-    StringSumHelper(float num) : String(num)
-    {
-    }
-    StringSumHelper(double num) : String(num)
-    {
-    }
-};
-
 } // namespace arduino
 
-using arduino::__FlashStringHelper;
 using arduino::String;
 
 #endif // __cplusplus

@@ -44,6 +44,9 @@
 			"**/Doxyfile": true,
 			"**/doxygen": true,
 			"*.code-workspace": true
+		},
+		"files.associations": {
+			"random": "cpp"
 		}
 	}
 }

@@ -110,12 +110,6 @@ String::String(const String &value)
     *this = value;
 }
 
-String::String(const __FlashStringHelper *pstr)
-{
-    init();
-    *this = pstr;
-}
-
 #if __cplusplus >= 201103L || defined(__GXX_EXPERIMENTAL_CXX0X__)
 String::String(String &&rval) : buffer(rval.buffer), capacity(rval.capacity), len(rval.len)
 {
@@ -256,17 +250,6 @@ String &String::copy(const char *cstr, unsigned int length)
     return *this;
 }
 
-String &String::copy(const __FlashStringHelper *pstr, unsigned int length)
-{
-    if (!reserve(length)) {
-        invalidate();
-        return *this;
-    }
-    len = length;
-    strcpy_P(buffer, (PGM_P)pstr);
-    return *this;
-}
-
 #if __cplusplus >= 201103L || defined(__GXX_EXPERIMENTAL_CXX0X__)
 void String::move(String &rhs)
 {
@@ -309,16 +292,6 @@ String &String::operator=(const char *cstr)
 {
     if (cstr)
         copy(cstr, strlen(cstr));
-    else
-        invalidate();
-
-    return *this;
-}
-
-String &String::operator=(const __FlashStringHelper *pstr)
-{
-    if (pstr)
-        copy(pstr, strlen_P((PGM_P)pstr));
     else
         invalidate();
 
@@ -410,112 +383,9 @@ bool String::concat(double num)
     return concat(string);
 }
 
-bool String::concat(const __FlashStringHelper *str)
-{
-    if (!str)
-        return false;
-    int length = strlen_P((const char *)str);
-    if (length == 0)
-        return true;
-    unsigned int newlen = len + length;
-    if (!reserve(newlen))
-        return false;
-    strcpy_P(buffer + len, (const char *)str);
-    len = newlen;
-    return true;
-}
-
 /*********************************************/
 /*  Concatenate                              */
 /*********************************************/
-
-StringSumHelper &operator+(const StringSumHelper &lhs, const String &rhs)
-{
-    StringSumHelper &a = const_cast<StringSumHelper &>(lhs);
-    if (!a.concat(rhs.buffer, rhs.len))
-        a.invalidate();
-    return a;
-}
-
-StringSumHelper &operator+(const StringSumHelper &lhs, const char *cstr)
-{
-    StringSumHelper &a = const_cast<StringSumHelper &>(lhs);
-    if (!cstr || !a.concat(cstr))
-        a.invalidate();
-    return a;
-}
-
-StringSumHelper &operator+(const StringSumHelper &lhs, char c)
-{
-    StringSumHelper &a = const_cast<StringSumHelper &>(lhs);
-    if (!a.concat(c))
-        a.invalidate();
-    return a;
-}
-
-StringSumHelper &operator+(const StringSumHelper &lhs, unsigned char num)
-{
-    StringSumHelper &a = const_cast<StringSumHelper &>(lhs);
-    if (!a.concat(num))
-        a.invalidate();
-    return a;
-}
-
-StringSumHelper &operator+(const StringSumHelper &lhs, int num)
-{
-    StringSumHelper &a = const_cast<StringSumHelper &>(lhs);
-    if (!a.concat(num))
-        a.invalidate();
-    return a;
-}
-
-StringSumHelper &operator+(const StringSumHelper &lhs, unsigned int num)
-{
-    StringSumHelper &a = const_cast<StringSumHelper &>(lhs);
-    if (!a.concat(num))
-        a.invalidate();
-    return a;
-}
-
-StringSumHelper &operator+(const StringSumHelper &lhs, long num)
-{
-    StringSumHelper &a = const_cast<StringSumHelper &>(lhs);
-    if (!a.concat(num))
-        a.invalidate();
-    return a;
-}
-
-StringSumHelper &operator+(const StringSumHelper &lhs, unsigned long num)
-{
-    StringSumHelper &a = const_cast<StringSumHelper &>(lhs);
-    if (!a.concat(num))
-        a.invalidate();
-    return a;
-}
-
-StringSumHelper &operator+(const StringSumHelper &lhs, float num)
-{
-    StringSumHelper &a = const_cast<StringSumHelper &>(lhs);
-    if (!a.concat(num))
-        a.invalidate();
-    return a;
-}
-
-StringSumHelper &operator+(const StringSumHelper &lhs, double num)
-{
-    StringSumHelper &a = const_cast<StringSumHelper &>(lhs);
-    if (!a.concat(num))
-        a.invalidate();
-    return a;
-}
-
-StringSumHelper &operator+(const StringSumHelper &lhs, const __FlashStringHelper *rhs)
-{
-    StringSumHelper &a = const_cast<StringSumHelper &>(lhs);
-    if (!a.concat(rhs))
-        a.invalidate();
-    return a;
-}
 
 /*********************************************/
 /*  Comparison                               */

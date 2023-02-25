@@ -38,9 +38,9 @@ public:
     void println(const char *format, ...);
     void print(const char *format, ...);
 
-    volatile uint8_t _rx_buffer_head;
-    volatile uint8_t _rx_buffer_tail;
-    unsigned char _rx_buffer[SERIAL_BUFFER_SIZE];
+    volatile uint8_t _rx_buffer_head             = 0;
+    volatile uint8_t _rx_buffer_tail             = 0;
+    unsigned char _rx_buffer[SERIAL_BUFFER_SIZE] = { 0 };
 
     // This method allows processing "SEND_BREAK" requests sent by
     // the USB host. Those requests indicate that the host wants to

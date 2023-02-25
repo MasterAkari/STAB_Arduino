@@ -1,6 +1,6 @@
 {
     "name": "STAB_Arduino",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "STAB_Arduino",
     "keywords": "STAB Arduino",
     "homepage": "https://github.com/MasterAkari/STAB_Arduino",
@@ -9,7 +9,7 @@
         "email": "masiro.to.akari@gmail.com",
         "url": "https://github.com/MasterAkari/STAB_Arduino"
     },
-    "platforms": "*", 
+    "platforms": "native",
     "repository": {
         "type": "git",
         "url": "https://github.com/MasterAkari/STAB_Arduino.git"
