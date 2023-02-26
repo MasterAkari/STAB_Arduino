@@ -16,3 +16,6 @@ int main(int argc, char **argv)
     return 0;
 }
 #endif
+
+#ifndef PIO_UNIT_TESTING
+#endif

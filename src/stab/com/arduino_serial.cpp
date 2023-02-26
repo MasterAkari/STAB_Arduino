@@ -14,6 +14,17 @@ Serial_STAB::Serial_STAB()
 {
     peek_buffer = -1;
 }
+Serial_STAB::Serial_STAB(uint8_t rx, uint8_t tx)
+{
+}
+Serial_STAB::~Serial_STAB()
+{
+}
+
+void Serial_STAB::begin()
+{
+}
+
 void Serial_STAB::begin(unsigned long baud)
 {
 }
@@ -57,6 +68,11 @@ int32_t Serial_STAB::readBreak()
     return 0;
 }
 
+size_t Serial_STAB::readBytes(uint8_t *buffer, size_t length)
+{
+    return 0;
+}
+
 uint32_t Serial_STAB::baud()
 {
     return 0;
@@ -86,6 +102,10 @@ void Serial_STAB::println(const char *format, ...)
 }
 
 void Serial_STAB::print(const char *format, ...)
+{
+}
+
+void Serial_STAB::setTimeout(unsigned long timeout)
 {
 }
 
