@@ -12,20 +12,20 @@
 #define ARDUINO_FUNC_COMMUNICATION_ARDUINO_SERIAL_HPP
 
 #include "../arduino_types.hpp"
-#define SERIAL_BUFFER_SIZE 255
+#define SERIAL_BUFFER_SIZE (255)
 #include <stdio.h>
 #include <stdlib.h>
 
-#define SERIAL_8N1 0x06
-#define SERIAL_8N2 0x0E
-#define SERIAL_7E1 0x24
-#define SERIAL_8E1 0x26
-#define SERIAL_7E2 0x2C
-#define SERIAL_8E2 0x2E
-#define SERIAL_7O1 0x34
-#define SERIAL_8O1 0x36
-#define SERIAL_7O2 0x3C
-#define SERIAL_8O2 0x3E
+#define SERIAL_8N1 (0x06)
+#define SERIAL_8N2 (0x0E)
+#define SERIAL_7E1 (0x24)
+#define SERIAL_8E1 (0x26)
+#define SERIAL_7E2 (0x2C)
+#define SERIAL_8E2 (0x2E)
+#define SERIAL_7O1 (0x34)
+#define SERIAL_8O1 (0x36)
+#define SERIAL_7O2 (0x3C)
+#define SERIAL_8O2 (0x3E)
 
 class Serial_STAB {
 public:

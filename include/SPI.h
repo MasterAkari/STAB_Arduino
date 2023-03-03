@@ -13,8 +13,8 @@
 
 #include "stab/arduino_types.hpp"
 
-#define SPI_PERIPHERALS_USED 1
-#define DEBUG_MODE           0
+#define SPI_PERIPHERALS_USED (1)
+#define DEBUG_MODE           (0)
 
 typedef enum
 {
